@@ -1,116 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Animation</title>
-	<style>
-		.box{
-			height:300px;
-			width:100%;
-			border:2px solid black;
-			position:relative;
-		}
-		.sun{
-			height:100px;
-			width: 100px;
-			position:absolute;
-			border-radius:50%;
-			top:40px;
-			left:40px;
-			background:yellow;
-			animation:sun 5s ease-in-out;
-			animation-delay:1s;
-		}
-		.cloud1{
-			     height:100px;
-			     width:120px;
-			     position:absolute;
-			     top:20px;
-                 left:-3px;
-                 opacity:0.8;
-                 animation:cloud1 5s linear;
-		}
-		.cloud2{
-			     height:100px;
-			     width:120px;
-			     position:absolute;
-			     top:20px;
-                 right:30px;
-                 opacity:0.8;
-                 animation:cloud2 5s ease-out ;
-		}
-		.cloud3{
-			     height:100px;
-			     width:120px;
-			     position:absolute;
-			     top:20px;
-                 left:50%;
-                 opacity:0.8;
-                 animation:cloud3 5s ease-in;
-		}
-		@keyframes cloud1{
-			from{
-				top:20px;
-                 left:-3px;
-			}
-			to{
-				top:20px;
-				left:110%;
-			}
-		}
-		@keyframes cloud2{
-			from{
-				top:20px;
-                 right:30px;
-			}
-			to{
-				top:20px;
-				right:110%;
-			}
-		}
-		@keyframes cloud3{
-			from{
-				top:20px;
-                 left:50%;
-			}
-			to{
-				top:20px;
-				left:100%;
-			}
-		}
-		@keyframes sun{
-			from{
-				top:40px;
-                 left:40px;
-			}
-			to{
-				top:40px;
-				left:110%;
-			}
-		}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Improved Animation</title>
+  <style>
+    body {
+      margin: 0;
+      background: #87ceeb; /* light sky blue */
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+    .box {
+      height: 300px;
+      max-width: 1000px;
+      margin: 20px auto;
+      border: 2px solid #333;
+      position: relative;
+      background: linear-gradient(to bottom, #87ceeb 60%, #fff 100%);
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .sun {
+      height: 100px;
+      width: 100px;
+      position: absolute;
+      border-radius: 50%;
+      top: 40px;
+      left: 40px;
+      background: radial-gradient(circle at center, #fff200, #f9d71c 60%, #f5a623 90%);
+      box-shadow: 0 0 30px 10px rgba(249, 215, 28, 0.7);
+      animation: sunMove 12s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 10px #f9d71c);
+    }
+    .cloud {
+      position: absolute;
+      top: 20px;
+      width: 120px;
+      height: 100px;
+      opacity: 0.85;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      animation-direction: alternate;
+      animation-fill-mode: forwards;
+      transform-origin: center;
+    }
+    .cloud img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+    }
+    .cloud1 {
+      left: -150px;
+      animation-name: cloudMove1, cloudPulse1;
+      animation-duration: 15s, 4s;
+      animation-delay: 0s, 0s;
+    }
+    .cloud2 {
+      right: -150px;
+      top: 50px;
+      animation-name: cloudMove2, cloudPulse2;
+      animation-duration: 18s, 5s;
+      animation-delay: 3s, 1s;
+    }
+    .cloud3 {
+      left: 50%;
+      top: 30px;
+      animation-name: cloudMove3, cloudPulse3;
+      animation-duration: 20s, 6s;
+      animation-delay: 6s, 2s;
+      transform-origin: center bottom;
+    }
 
-
-
-
-
-
-
-	</style>
-
+    @keyframes sunMove {
+      0% {
+        left: 40px;
+        top: 40px;
+        filter: drop-shadow(0 0 10px #f9d71c);
+        transform: scale(1);
+      }
+      50% {
+        left: 50%;
+        top: 30px;
+        filter: drop-shadow(0 0 25px #f9d71c);
+        transform: scale(1.1);
+      }
+      100% {
+        left: 110%;
+        top: 40px;
+        filter: drop-shadow(0 0 10px #f9d71c);
+        transform: scale(1);
+      }
+    }
+    @keyframes cloudMove1 {
+      0% {
+        left: -150px;
+        top: 20px;
+      }
+      100% {
+        left: 110%;
+        top: 20px;
+      }
+    }
+    @keyframes cloudMove2 {
+      0% {
+        right: -150px;
+        top: 50px;
+      }
+      100% {
+        right: 110%;
+        top: 50px;
+      }
+    }
+    @keyframes cloudMove3 {
+      0% {
+        left: 50%;
+        top: 30px;
+      }
+      100% {
+        left: 110%;
+        top: 30px;
+      }
+    }
+    /* subtle scale and opacity pulse for clouds */
+    @keyframes cloudPulse1 {
+      0%, 100% {
+        opacity: 0.85;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.9;
+        transform: scale(1.05);
+      }
+    }
+    @keyframes cloudPulse2 {
+      0%, 100% {
+        opacity: 0.85;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.88;
+        transform: scale(1.03);
+      }
+    }
+    @keyframes cloudPulse3 {
+      0%, 100% {
+        opacity: 0.85;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.9;
+        transform: scale(1.04);
+      }
+    }
+  </style>
 </head>
 <body>
-      <div class="box">
-            <div class="sun"></div>
-            <div class="cloud1">	
-            	<img src="clouds.png" height="100%"width="100%">
-              </div> 
-              <div class="cloud2">	
-            	<img src="clouds.png" height="100%"width="100%">
-              </div> 
-              <div class="cloud3">	
-            	<img src="clouds.png" height="100%"width="100%">
-              </div> 
-      </div>
+  <div class="box">
+    <div class="sun"></div>
+    <div class="cloud cloud1">
+      <img src="clouds.png" alt="Cloud 1" />
+    </div>
+    <div class="cloud cloud2">
+      <img src="clouds.png" alt="Cloud 2" />
+    </div>
+    <div class="cloud cloud3">
+      <img src="clouds.png" alt="Cloud 3" />
+    </div>
+  </div>
 </body>
 </html>
